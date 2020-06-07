@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { _ } from 'meteor/underscore';
+import { check } from "meteor/check";
 
 class BaseCollection {
   /**
@@ -46,9 +47,13 @@ class BaseCollection {
   /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
    * @param { String | Object } name A document or docID in this collection.
+   * @returns true
    */
   removeIt(name) {
-    throw new Meteor.Error(`removeIt(${name}) is not defined in BaseCollection.`);
+    const doc = this.findDoc(name);
+    check(doc, Object);
+    this._collection.remove(doc._id);
+    return true;
   }
 
   /**
@@ -145,6 +150,18 @@ class BaseCollection {
         || !!this._collection.findOne({ name })
         || !!this._collection.findOne({ _id: name }));
   }
+
+  /**
+   * Verifies that the passed object is one of this collection's instances.
+   * @param { String | Object } name Should be a defined ID or doc in this collection.
+   * @throws { Meteor.Error } If not defined.
+   */
+  assertDefined(name) {
+    if (!this.isDefined(name)) {
+      throw new Meteor.Error(`${name} is not a valid instance of ${this._type}.`, '', Error().stack);
+    }
+  }
+
 
   /**
    * Default publication method for entities.
