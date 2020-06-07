@@ -1,0 +1,51 @@
+{
+  "name": "app",
+  "private": true,
+  "scripts": {
+    "start": "meteor run",
+    "test": "cross-env TEST_BROWSER_DRIVER=puppeteer meteor test --once --driver-package meteortesting:mocha --port 3100",
+    "test-app": "cross-env TEST_BROWSER_DRIVER=puppeteerTEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha --port 3100",
+    "visualize": "meteor --production --extra-packages bundle-visualizer"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.8.4",
+    "cross-env": "^7.0.2",
+    "meteor-node-stubs": "^1.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.2",
+    "simpl-schema": "^1.7.3",
+    "uniforms": "^2.6.8",
+    "uniforms-bridge-simple-schema-2": "^2.6.8",
+    "uniforms-semantic": "^2.6.8"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-meteor": "^7.0.0",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "eslint-utils": "^2.0.0",
+    "faker": "^4.1.0",
+    "fast-check": "^1.24.2",
+    "puppeteer": "^3.0.4",
+    "sinon": "^9.0.2"
+  },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main.jsx",
+      "server": "server/main.js"
+    },
+    "testModule": "tests/main.js"
+  }
+}
